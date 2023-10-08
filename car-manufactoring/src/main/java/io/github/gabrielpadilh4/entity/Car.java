@@ -1,14 +1,20 @@
 package io.github.gabrielpadilh4.entity;
 
-import javax.json.bind.annotation.JsonbProperty;
-import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "cars")
+@NamedQuery(name = Car.FIND_ALL, query = "select c from Car c")
 public class Car {
 
-    @JsonbTransient
+    public static final String FIND_ALL = "Car.findAll";
+
+    @Id
     private String identifier;
     private Color color;
-    @JsonbProperty("engine")
     private EngineType engineType;
 
     public String getIdentifier() {
