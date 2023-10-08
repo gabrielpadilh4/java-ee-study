@@ -2,6 +2,7 @@ package io.github.gabrielpadilh4.boundary;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import javax.ejb.Stateless;
 import javax.enterprise.event.Event;
@@ -38,8 +39,9 @@ public class CarManufacturer {
         List<Car> cars = new ArrayList<>();
 
         Car car = new Car();
+        car.setIdentifier(UUID.randomUUID().toString());
         car.setColor(Color.BLACK);
-        car.setEngineType(EngineType.DIESEL);
+        car.setEngineType(EngineType.ELETRIC);
 
         cars.add(car);
 
