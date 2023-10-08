@@ -1,12 +1,16 @@
 package io.github.gabrielpadilh4.entity;
 
 public class Specification {
-    private final Color color;
-    private final EngineType engineType;
+    private Color color;
+    private EngineType engineType;
 
     public Specification(Color color, EngineType engineType) {
         this.color = color;
         this.engineType = engineType;
+    }
+
+    public Specification() {
+        super();
     }
 
     public Color getColor() {

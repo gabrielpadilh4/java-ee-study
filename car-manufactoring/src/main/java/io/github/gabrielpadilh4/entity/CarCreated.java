@@ -11,5 +11,4 @@ public class CarCreated {
     public String getIdentifier() {
         return identifier;
     }
-
 }
