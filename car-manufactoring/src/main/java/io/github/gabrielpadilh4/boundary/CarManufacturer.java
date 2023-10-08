@@ -35,7 +35,7 @@ public class CarManufacturer {
         return car;
     }
 
-    public static List<Car> retrieveCars() {
+    public List<Car> retrieveCars() {
         List<Car> cars = new ArrayList<>();
 
         Car car = new Car();
@@ -47,5 +47,9 @@ public class CarManufacturer {
 
         return cars;
 
+    }
+
+    public Car retrieveCar(String identifier) {
+        return null;
     }
 }

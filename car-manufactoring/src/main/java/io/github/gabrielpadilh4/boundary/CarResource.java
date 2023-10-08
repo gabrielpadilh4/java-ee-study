@@ -1,19 +1,24 @@
 package io.github.gabrielpadilh4.boundary;
 
+import java.net.URI;
+
 import javax.inject.Inject;
 import javax.json.Json;
 import javax.json.JsonArray;
-import javax.json.JsonObject;
 import javax.json.stream.JsonCollectors;
+import javax.websocket.server.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
-import io.github.gabrielpadilh4.entity.Color;
-import io.github.gabrielpadilh4.entity.EngineType;
+import io.github.gabrielpadilh4.entity.Car;
 import io.github.gabrielpadilh4.entity.Specification;
 
 @Path("cars")
@@ -24,9 +29,12 @@ public class CarResource {
     @Inject
     CarManufacturer carManufacturer;
 
+    @Context
+    UriInfo uriInfo;
+
     @GET
     public JsonArray retrieveCars() {
-        return CarManufacturer.retrieveCars()
+        return carManufacturer.retrieveCars()
                 .stream()
                 .map(c -> Json.createObjectBuilder()
                         .add("color", c.getColor().name())
@@ -38,10 +46,20 @@ public class CarResource {
     }
 
     @POST
-    public void createCar(JsonObject jsonObject) {
-        Color color = Color.valueOf(jsonObject.getString("color"));
-        EngineType engineType = EngineType.valueOf(jsonObject.getString("engine"));
+    public Response createCar(Specification specification) {
+        Car car = carManufacturer.manufactureCar(specification);
 
-        carManufacturer.manufactureCar(new Specification(color, engineType));
+        URI uri = uriInfo.getBaseUriBuilder()
+                .path(CarResource.class)
+                .path(CarResource.class, "retrieveCar")
+                .build(car.getIdentifier());
+
+        return Response.created(uri).build();
+    }
+
+    @GET
+    @Path("{id}")
+    public Car retrieveCar(@PathParam("id") String identifier) {
+        return carManufacturer.retrieveCar(identifier);
     }
 }
