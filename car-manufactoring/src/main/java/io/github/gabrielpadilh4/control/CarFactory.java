@@ -11,6 +11,7 @@ import io.github.gabrielpadilh4.entity.Specification;
 public class CarFactory {
 
     @Inject
+    @Diesel
     Color defaultColor;
 
     public Car createCar(Specification specification) {

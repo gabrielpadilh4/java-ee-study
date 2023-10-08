@@ -6,6 +6,7 @@ import io.github.gabrielpadilh4.entity.Color;
 
 public class DefaultColorExposer {
     @Produces
+    @Diesel
     public Color exposeDefaultColor() {
         return Color.RED;
     }
