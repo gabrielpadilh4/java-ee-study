@@ -2,12 +2,14 @@ package io.github.gabrielpadilh4.control;
 
 import java.util.UUID;
 
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 
 import io.github.gabrielpadilh4.entity.Car;
 import io.github.gabrielpadilh4.entity.Color;
 import io.github.gabrielpadilh4.entity.Specification;
 
+@ApplicationScoped
 public class CarFactory {
 
     @Inject
