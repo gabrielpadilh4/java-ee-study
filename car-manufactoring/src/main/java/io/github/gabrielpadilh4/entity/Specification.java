@@ -1,7 +1,13 @@
 package io.github.gabrielpadilh4.entity;
 
+import javax.validation.constraints.NotNull;
+
 public class Specification {
+
+    @NotNull
     private Color color;
+
+    @NotNull
     private EngineType engineType;
 
     public Specification() {
